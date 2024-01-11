@@ -1,0 +1,80 @@
+.wrapper {
+	border-radius: 14px;
+	background: #f4f4f4;
+	padding: 15px;
+}
+.block {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 7px;
+	padding: 15px;
+	background-color: #fff;
+	margin: 0 0 10px 0;
+}
+.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 150px;
+}
+.block span {
+	color: #777;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}
+.bold {
+	color: #181818;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	margin: 0;
+}
+.date {
+	color: #777;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+.teams {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+@media (max-width: 1200px) {
+	.block {
+		flex-direction: column;
+		gap: 10px;
+	}
+	.top {
+		width: 100%;
+	}
+	.teams {
+		padding: 5px;
+		width: 100%;
+		border-radius: 4px;
+		background: #f4f4f4;
+	}
+}
+
+@media (max-width: 768px) {
+	.bold {
+		font-size: 12px;
+		text-align: center;
+	}
+	.block span {
+		font-size: 12px;
+	}
+	.date {
+		font-size: 12px;
+	}
+	.top {
+		gap: 10px;
+	}
+}

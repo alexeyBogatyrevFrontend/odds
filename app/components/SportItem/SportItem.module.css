@@ -1,0 +1,40 @@
+.sportCategory {
+	overflow-y: auto;
+	max-height: 70vh;
+	scrollbar-width: thin;
+	scrollbar-color: transparent transparent;
+}
+.sportCategory::-webkit-scrollbar {
+	width: 6px;
+}
+.sportCategory::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+.sportCategory__wrapper {
+	border-radius: 14px;
+	background-color: #f4f4f4;
+	padding: 15px;
+}
+.sportCategory__item {
+	padding: 15px;
+	background-color: #fff;
+	border-radius: 7px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 10px 0;
+}
+.sportCategory__item span {
+	color: #181818;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+}
+.sportCategory__item span:nth-child(2) {
+	color: #777;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}

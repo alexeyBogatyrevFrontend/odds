@@ -1,0 +1,15 @@
+@media (max-width: 768px) {
+	.footer__container {
+		flex-direction: column;
+		align-items: start;
+		gap: 25px;
+	}
+	.footer__bottom {
+		width: 100%;
+		align-items: initial;
+	}
+	.copy {
+		text-align: center;
+		font-size: 10px;
+	}
+}

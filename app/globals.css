@@ -1,3 +1,172 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	font-family: 'Inter', sans-serif;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+:focus,
+:active {
+	outline: none;
+}
+
+a:focus,
+a:active {
+	outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+	display: block;
+}
+
+html,
+body {
+	height: 100%;
+	width: 100%;
+	font-size: 100%;
+	line-height: 1;
+	font-size: 14px;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	overflow-x: hidden;
+}
+
+.main {
+	flex: 1 1 auto;
+	padding: 30px 0 60px 0;
+}
+
+.container {
+	max-width: 1200px;
+	padding: 0 20px;
+	margin: 0 auto;
+	position: relative;
+}
+
+input,
+button,
+textarea {
+	font-family: inherit;
+}
+select::-ms-expand {
+	display: none;
+}
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: '';
+	background-color: white;
+}
+input::-ms-clear {
+	display: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+a,
+a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+ul li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+.mainWrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+/*  */
+td,
+th {
+	border: 1px solid black;
+	padding: 5px 15px;
+}
+
+/* match */
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+/* main  */
+.main__wrapper {
+	display: flex;
+	gap: 20px;
+}
+.left {
+	min-width: 25%;
+}
+.right {
+	min-width: 73%;
+}
+h2 {
+	color: #181818;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	margin: 0 0 20px 0;
+}
+/* @media (max-width: 1270px) {
+	.left {
+		min-width: 200px;
+	}
+} */
+@media (max-width: 768px) {
+	h2 {
+		font-size: 16px;
+	}
+	.left {
+		width: 100%;
+	}
+	.right {
+		width: 100%;
+	}
+	.main__wrapper {
+		flex-direction: column;
+	}
+}

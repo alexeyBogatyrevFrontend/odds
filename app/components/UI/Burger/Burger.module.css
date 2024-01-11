@@ -1,0 +1,28 @@
+@media (max-width: 768px) {
+	.burgerMenu {
+		width: 36px;
+		height: 12px;
+		cursor: pointer;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+	}
+
+	.line {
+		width: 36px;
+		height: 2px;
+		background-color: #18c653;
+		transition: 0.3s;
+	}
+
+	.open .line:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 10px);
+	}
+
+	.open .line:nth-child(2) {
+		transform: rotate(-45deg) translate(-4px, -5px);
+	}
+}
