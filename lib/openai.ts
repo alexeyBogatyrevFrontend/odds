@@ -1,8 +1,7 @@
 import OpenAI from 'openai'
 
 const openai = new OpenAI({
-	apiKey: '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',
-	dangerouslyAllowBrowser: true,
+	apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 })
 
 const generateText = async (first: string, second: string, date: string) => {

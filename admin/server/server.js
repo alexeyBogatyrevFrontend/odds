@@ -11,13 +11,9 @@ app.use(cors())
 
 app.use(bodyParser.json({ limit: '5mb' }))
 
-const mongoURI =
-	'mongodb+srv://adminpanel:adminpanel@adminpanel.khj0hmz.mongodb.net/?retryWrites=true&w=majority'
+const mongoURI = 'mongodb://localhost:27017/odds'
 
-mongoose.connect(mongoURI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
+mongoose.connect(mongoURI)
 
 const connection = mongoose.connection
 connection.once('open', () => {

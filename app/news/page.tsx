@@ -15,7 +15,7 @@ const page = async () => {
 		<Layout>
 			<div className={styles.page}>
 				<h2>Все новости</h2>
-				<select className={styles.sort}>
+				{/* <select className={styles.sort}>
 					<option disabled selected>
 						Сортировка
 					</option>
@@ -23,7 +23,7 @@ const page = async () => {
 					<option value='oldest'>Сначала старые</option>
 					<option value='top'>Сначала топовые</option>
 					<option value='usual'>Сначала обычные</option>
-				</select>
+				</select> */}
 				<div className={styles.wrapper}>
 					{newsList.map(news => (
 						<NewsItem item={news} key={news._id} />
