@@ -1,5 +1,6 @@
 const axios = require('axios')
 const fs = require('fs').promises
+const sendSitemap = require('./yandexWebmaster')
 
 // Замените API_KEY на ваш реальный ключ
 const API_KEY = 'zfme0kbYPxejRvJvTdv5gs0LfaadXMSF'
@@ -32,6 +33,11 @@ async function generateAndSaveSitemap() {
 		await fs.writeFile('./public/sitemap.xml', sitemapContent, 'utf-8')
 
 		console.log('Sitemap успешно сохранен в файл sitemap.xml')
+
+		await sendSitemap(
+			'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA',
+			'./public/sitemap.xml'
+		)
 	} catch (error) {
 		console.error('Ошибка при получении данных:', error.message)
 	}
