@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import store from '../store'
+import { useRouter } from 'next/router'
 
 const initialState = {
 	category: 'Soccer',

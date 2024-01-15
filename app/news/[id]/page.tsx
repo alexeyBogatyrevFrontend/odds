@@ -26,6 +26,7 @@ export async function generateMetadata({ params: { id } }: NewsPageProps) {
 }
 
 const page: FC<NewsPageProps> = async ({ params: { id } }) => {
+	// const newsList: newsType[] = []
 	const newsList: newsType[] = await fetchNews()
 
 	const currentNews = newsList.filter(news => news._id === id)[0]

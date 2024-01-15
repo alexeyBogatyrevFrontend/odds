@@ -1,17 +1,11 @@
-import React, {
-	Dispatch,
-	FC,
-	MouseEvent,
-	SetStateAction,
-	useEffect,
-} from 'react'
+import React, { Dispatch, FC, SetStateAction, useEffect } from 'react'
 import styles from './SportsCategoryItem.module.css'
 import { sportsCategoryType } from '../SportsCategoryList/SportsCategoryList'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { sportState } from '@/app/types'
+import { useDispatch } from 'react-redux'
+
 import { AppDispatch } from '@/lib/slices/newsSlice'
 import { setCategory } from '@/lib/slices/sportCategorySlice'
 
@@ -33,7 +27,7 @@ const SportsCategoryItem: FC<SportsCategoryItemProps> = ({
 		// e.preventDefault()
 		setActive(item.category)
 		dispatch(setCategory(item.category))
-		localStorage.setItem('sport', item.category)
+		// localStorage.setItem('sport', item.category)
 	}
 
 	useEffect(() => {
@@ -43,7 +37,8 @@ const SportsCategoryItem: FC<SportsCategoryItemProps> = ({
 
 	return (
 		<Link
-			href='/'
+			href={`/?category=${item.category}`}
+			aria-disabled={true}
 			className={`${styles.block} ${
 				active === item.category ? styles.active : ''
 			}`}

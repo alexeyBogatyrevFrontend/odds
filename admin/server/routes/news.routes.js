@@ -143,21 +143,14 @@ router.delete('/delete/:id', async (req, res) => {
 		await News.findByIdAndDelete(newsId)
 
 		const currentPage = parseInt(req.query.currentPage) || 1
-		// const totalPages = parseInt(req.query.totalPages) || 1
 		const pageSize = parseInt(req.query.pageSize) || 6
 
-		// Пересчитайте количество новостей
 		const totalCount = isTopNews
 			? await News.countDocuments({ isTop: true })
 			: await News.countDocuments()
 
-		// Если после удаления текущая страница больше общего количества страниц, установите currentPage равным totalPages
-		// const newCurrentPage = Math.min(currentPage, totalPages)
-
-		// Вычислите новый сдвиг
 		const skip = (currentPage - 1) * pageSize
 
-		// Получите новости для текущей страницы
 		const query = isTopNews ? { isTop: true } : {}
 		const allNews = await News.find(query).skip(skip).limit(pageSize)
 

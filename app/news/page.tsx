@@ -10,20 +10,13 @@ import { sortNews } from '../utils/sortNews'
 
 const page = async () => {
 	const newsList: newsType[] = await fetchNews()
+	// const newsList: newsType[] = []
 
 	return (
 		<Layout>
 			<div className={styles.page}>
 				<h2>Все новости</h2>
-				{/* <select className={styles.sort}>
-					<option disabled selected>
-						Сортировка
-					</option>
-					<option value='newest'>Сначала новые</option>
-					<option value='oldest'>Сначала старые</option>
-					<option value='top'>Сначала топовые</option>
-					<option value='usual'>Сначала обычные</option>
-				</select> */}
+
 				<div className={styles.wrapper}>
 					{newsList.map(news => (
 						<NewsItem item={news} key={news._id} />

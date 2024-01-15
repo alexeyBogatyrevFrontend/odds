@@ -10,7 +10,7 @@ const oddsFormat = 'decimal'
 const markets = 'h2h'
 const dateFormat = 'iso'
 
-const baseUrl = 'https://test.1wawin.top' // Замените на ваш базовый URL
+const baseUrl = 'https://test.seo-team.org' // Замените на ваш базовый URL
 
 // Асинхронная функция для генерации и сохранения sitemap в файл
 async function generateAndSaveSitemap() {
@@ -55,7 +55,7 @@ async function generateSitemapContent(events, baseUrl) {
 
 			// Добавляем каждый URL в sitemapEntries
 			for (const gameId of gameIds) {
-				const gameUrl = `${baseUrl}/gamepage/${encodeURIComponent(
+				const gameUrl = `${baseUrl}/odds/gamepage/${encodeURIComponent(
 					event.key
 				)}&amp;${encodeURIComponent(gameId)}?category=${encodeURIComponent(
 					event.group

@@ -6,7 +6,6 @@ import React, { FC } from 'react'
 
 import styles from '../EventsPage.module.css'
 import { formatDate } from '@/app/utils/formatDate'
-import { useRouter } from 'next/navigation'
 
 type EventsPageProps = {
 	params: {
@@ -55,7 +54,10 @@ const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 					<h2>Спортивные события</h2>
 					<div className={styles.wrapper}>
 						{games.map((game, index) => (
-							<Link href={`/odds/gamepage/${key}&${game.id}`} key={index}>
+							<Link
+								href={`/odds/gamepage/${key}&${game.id}?category=${group}`}
+								key={index}
+							>
 								<div className={styles.block}>
 									<div className={styles.top}>
 										<h2 className={styles.bold}>{game.sport_title}</h2>

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import SportItem from './components/SportItem/SportItem'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, sportState } from './types'
 import { AppDispatch, fetchNews } from '@/lib/slices/newsSlice'
@@ -24,6 +24,13 @@ export type EventType = {
 }
 
 const Page = () => {
+	const [event, setEvent] = useState<EventType[]>([])
+
+	const router = useRouter()
+	const searchParams = useSearchParams()
+
+	const category = searchParams.get('category')
+
 	const { status } = useSelector((state: RootState) => state.news)
 	const { category: sport } = useSelector((state: sportState) => state.sport)
 
@@ -34,10 +41,6 @@ const Page = () => {
 			dispatch(fetchNews())
 		}
 	}, [status, dispatch])
-
-	const router = useRouter()
-
-	const [event, setEvent] = useState<EventType[]>([])
 
 	const fetchData = async (sport: string) => {
 		setEvent([])
@@ -65,12 +68,16 @@ const Page = () => {
 	}
 
 	useEffect(() => {
-		const storageSport = localStorage.getItem('sport')
+		router.push(`/?category=${category}`)
+		if (category) fetchData(category)
+	}, [])
 
-		if (storageSport) {
-			fetchData(storageSport)
+	useEffect(() => {
+		if (sport) {
+			router.push(`/?category=${sport}`)
+			fetchData(sport)
 		}
-	}, [sport])
+	}, [router, sport])
 
 	return (
 		<Layout>
