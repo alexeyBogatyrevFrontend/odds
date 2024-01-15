@@ -14,20 +14,20 @@ type NewsPageProps = {
 	}
 }
 
-export async function generateMetadata({ params: { id } }: NewsPageProps) {
-	const newsList: newsType[] = await fetchNews()
+// export async function generateMetadata({ params: { id } }: NewsPageProps) {
+// 	const newsList: newsType[] = await fetchNews()
 
-	const currentNews = newsList.filter(news => news._id === id)[0]
+// 	const currentNews = newsList.filter(news => news._id === id)[0]
 
-	return {
-		title: currentNews.title,
-		description: currentNews.description,
-	}
-}
+// 	return {
+// 		title: currentNews.title,
+// 		description: currentNews.description,
+// 	}
+// }
 
 const page: FC<NewsPageProps> = async ({ params: { id } }) => {
-	// const newsList: newsType[] = []
-	const newsList: newsType[] = await fetchNews()
+	const newsList: newsType[] = []
+	// const newsList: newsType[] = await fetchNews()
 
 	const currentNews = newsList.filter(news => news._id === id)[0]
 

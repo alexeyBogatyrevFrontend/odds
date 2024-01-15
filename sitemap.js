@@ -34,10 +34,10 @@ async function generateAndSaveSitemap() {
 
 		console.log('Sitemap успешно сохранен в файл sitemap.xml')
 
-		await sendSitemap(
-			'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA',
-			'./public/sitemap.xml'
-		)
+		// await sendSitemap(
+		// 	'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA',
+		// 	'./public/sitemap.xml'
+		// )
 	} catch (error) {
 		console.error('Ошибка при получении данных:', error.message)
 	}

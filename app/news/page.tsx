@@ -9,8 +9,8 @@ import { fetchNews } from '../action'
 import { sortNews } from '../utils/sortNews'
 
 const page = async () => {
-	const newsList: newsType[] = await fetchNews()
-	// const newsList: newsType[] = []
+	// const newsList: newsType[] = await fetchNews()
+	const newsList: newsType[] = []
 
 	return (
 		<Layout>

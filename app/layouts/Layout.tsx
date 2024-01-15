@@ -28,9 +28,9 @@ const Layout: FC<LayoutType> = ({ children }) => {
 	const { newsList } = useSelector((state: RootState) => state.news)
 	const dispatch = useDispatch<AppDispatch>()
 
-	useEffect(() => {
-		if (!newsList.length) dispatch(fetchNews())
-	}, [dispatch])
+	// useEffect(() => {
+	// 	if (!newsList.length) dispatch(fetchNews())
+	// }, [dispatch])
 
 	return (
 		<div className='mainWrapper'>

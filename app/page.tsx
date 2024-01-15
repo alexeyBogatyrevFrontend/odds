@@ -36,11 +36,11 @@ const Page = () => {
 
 	const dispatch = useDispatch<AppDispatch>()
 
-	useEffect(() => {
-		if (status === 'idle') {
-			dispatch(fetchNews())
-		}
-	}, [status, dispatch])
+	// useEffect(() => {
+	// 	if (status === 'idle') {
+	// 		dispatch(fetchNews())
+	// 	}
+	// }, [status, dispatch])
 
 	const fetchData = async (sport: string) => {
 		setEvent([])

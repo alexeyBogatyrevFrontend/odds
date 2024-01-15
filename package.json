@@ -7,7 +7,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"generate-sitemap": "node sitemap.js"
+		"generate-sitemap": "node sitemap.js",
+		"yandex": "node yandexWebmaster.js"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.0.1",
