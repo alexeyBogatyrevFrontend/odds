@@ -6,33 +6,18 @@ const user_id = 1167705533
 const host_id = 'https:test.seo-team.org:443'
 const sitemapPath = 'https://test.seo-team.org/sitemap.xml'
 
-const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
-	try {
-		const headers = {
-			Authorization: `OAuth ${apiToken}`,
-			'Content-Type': 'application/json', // Указываем тип данных в заголовке
-		}
+// get statistics
+const query_indicator = 'TOTAL_SHOWS'
+const device_type_indicator = 'ALL'
+const date_from = '2023-01-01'
+const date_to = '2023-12-31'
 
-		const requestData = {
-			url: sitemapPath, // Замените на реальный URL вашего файла Sitemap
-		}
-
-		const response = await axios.post(
-			`https://api.webmaster.yandex.net/v4/user/${user_id}/hosts/${host_id}/user-added-sitemaps`,
-			requestData,
-			{ headers }
-		)
-
-		console.log(response.data)
-		return response.data
-	} catch (error) {
-		console.error('Error sending sitemap:', error.message)
-		throw error
-	}
-}
-// { sitemap_id: '27985acc-05d6-3201-a601-be84c1ea56b4' }
-
-// sendSitemap(apiToken, user_id, host_id, sitemapPath)
+// indexNow
+const url =
+	'https://test.seo-team.org/odds/gamepage/basketball_euroleague&ae82fbfae76e43711bc86e08a0be6c45?category=Basketball'
+const key = 'EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX'
+const keyLocation =
+	'https://test.seo-team.org/EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX.txt'
 
 const getStatistics = async (
 	apiToken,
@@ -70,18 +55,42 @@ const getStatistics = async (
 	}
 }
 
-// Пример использования
-const query_indicator = 'TOTAL_SHOWS' // Замените на реальный индикатор запроса
-const device_type_indicator = 'ALL' // Замените на реальный тип устройства
-const date_from = '2023-01-01' // Замените на реальную дату начала интервала
-const date_to = '2023-12-31' // Замените на реальную дату конца интервала
+// getStatistics(
+// 	apiToken,
+// 	user_id,
+// 	host_id,
+// 	query_indicator,
+// 	device_type_indicator,
+// 	date_from,
+// 	date_to
+// )
 
-getStatistics(
-	apiToken,
-	user_id,
-	host_id,
-	query_indicator,
-	device_type_indicator,
-	date_from,
-	date_to
-)
+const sendIndexNowRequest = async (url, key, keyLocation) => {
+	try {
+		const headers = {
+			'Content-Type': 'application/json',
+		}
+
+		// Параметры запроса
+		const queryParams = {
+			url,
+			key,
+			keyLocation,
+		}
+
+		const response = await axios.get('https://yandex.com/indexnow', {
+			headers,
+			params: queryParams,
+		})
+
+		console.log(response.data)
+		return response.data
+	} catch (error) {
+		console.error('Error sending IndexNow request:', error.message)
+		throw error
+	}
+}
+
+// Пример использования
+
+sendIndexNowRequest(url, key, keyLocation)

@@ -1,6 +1,6 @@
 const axios = require('axios')
 const fs = require('fs').promises
-const sendSitemap = require('./yandexWebmaster')
+const { exec } = require('child_process')
 
 // Замените API_KEY на ваш реальный ключ
 const API_KEY = 'zfme0kbYPxejRvJvTdv5gs0LfaadXMSF'
@@ -11,6 +11,37 @@ const markets = 'h2h'
 const dateFormat = 'iso'
 
 const baseUrl = 'https://test.seo-team.org' // Замените на ваш базовый URL
+
+const apiToken = 'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA'
+const user_id = 1167705533
+const host_id = 'https:test.seo-team.org:443'
+// const sitemapPath = 'https://test.seo-team.org/sitemap.xml'
+
+const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
+	try {
+		const headers = {
+			Authorization: `OAuth ${apiToken}`,
+			'Content-Type': 'application/json', // Указываем тип данных в заголовке
+		}
+
+		const requestData = {
+			url: sitemapPath, // Замените на реальный URL вашего файла Sitemap
+		}
+
+		const response = await axios.post(
+			`https://api.webmaster.yandex.net/v4/user/${user_id}/hosts/${host_id}/user-added-sitemaps`,
+			requestData,
+			{ headers }
+		)
+
+		console.log(response.data)
+		return response.data
+	} catch (error) {
+		console.error('Error sending sitemap:', error.message)
+		throw error
+	}
+}
+// { sitemap_id: '27985acc-05d6-3201-a601-be84c1ea56b4' }
 
 // Асинхронная функция для генерации и сохранения sitemap в файл
 async function generateAndSaveSitemap() {
@@ -29,15 +60,26 @@ async function generateAndSaveSitemap() {
 		// Генерируем sitemap
 		const sitemapContent = await generateSitemapContent(events, baseUrl)
 
+		const currentDate = new Date()
+			.toISOString()
+			.replace(/:/g, '-')
+			.replace(/\./g, '-')
+		const fileName = `./public/sitemap_${currentDate}.xml`
+		const sitemapPath = `https://test.seo-team.org/sitemap_${currentDate}.xml`
+
 		// Сохраняем sitemap в файл
-		await fs.writeFile('./public/sitemap.xml', sitemapContent, 'utf-8')
+		await fs.writeFile(fileName, sitemapContent, 'utf-8')
 
+		await sendSitemap(apiToken, user_id, host_id, sitemapPath)
+
+		exec('pm2 restart all', (error, stdout, stderr) => {
+			if (error) {
+				console.error(`Error restarting pm2: ${error.message}`)
+				return
+			}
+			console.log(`pm2 restarted successfully.`)
+		})
 		console.log('Sitemap успешно сохранен в файл sitemap.xml')
-
-		// await sendSitemap(
-		// 	'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA',
-		// 	'./public/sitemap.xml'
-		// )
 	} catch (error) {
 		console.error('Ошибка при получении данных:', error.message)
 	}

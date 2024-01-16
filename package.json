@@ -7,13 +7,15 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"generate-sitemap": "node sitemap.js",
+		"sitemap": "node sitemap.js",
 		"yandex": "node yandexWebmaster.js"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.0.1",
 		"axios": "^1.6.5",
 		"dayjs": "^1.11.10",
+		"mongoose": "^8.0.4",
+		"multer": "^1.4.5-lts.1",
 		"next": "14.0.4",
 		"openai": "^4.24.3",
 		"react": "^18",
@@ -21,6 +23,7 @@
 		"react-redux": "^9.0.4"
 	},
 	"devDependencies": {
+		"@types/multer": "^1.4.11",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
