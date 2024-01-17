@@ -10,15 +10,15 @@ const navLink = [
 	},
 	{
 		name: 'Категории спорта',
-		link: '/sportCategory',
+		link: '/',
 	},
 	{
 		name: 'Спортивные события',
-		link: '/sportEvents',
+		link: '/',
 	},
 	{
 		name: 'Новости',
-		link: '/all-news',
+		link: '/news',
 	},
 ]
 
@@ -35,8 +35,8 @@ const Menu: FC<MenuProps> = ({ burger, header }) => {
 			}`}
 		>
 			<ul className='flex items-center justify-center gap-7'>
-				{navLink.map(item => (
-					<li key={item.link}>
+				{navLink.map((item, index) => (
+					<li key={item.link + index}>
 						<Link href={item.link}>{item.name}</Link>
 					</li>
 				))}
