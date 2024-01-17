@@ -17,7 +17,7 @@ const sportsCategory = [
 	{
 		title: 'Тенис',
 		img: 'tennis',
-		category: 'Golf',
+		category: 'Tennis',
 	},
 	{
 		title: 'Хоккей',
