@@ -1,6 +1,7 @@
 const axios = require('axios')
 const fs = require('fs').promises
 const { exec } = require('child_process')
+const cron = require('node-cron')
 
 // Замените API_KEY на ваш реальный ключ
 const API_KEY = 'zfme0kbYPxejRvJvTdv5gs0LfaadXMSF'
@@ -134,5 +135,7 @@ async function getGame(key) {
 	return response.data
 }
 
-// Вызываем асинхронную функцию для генерации и сохранения sitemap
-generateAndSaveSitemap()
+// generateAndSaveSitemap()
+cron.schedule('35 13 * * *', () => {
+	generateAndSaveSitemap()
+})

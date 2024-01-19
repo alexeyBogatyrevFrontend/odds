@@ -1,3 +1,4 @@
+// models/news.model.js
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
@@ -10,7 +11,7 @@ const newsSchema = new Schema(
 		textEditor: { type: String, required: true },
 		isTop: { type: Boolean, required: true },
 		date: { type: Date, required: true },
-		image: { type: Buffer, required: true },
+		imageUrl: { type: String, required: true }, // Замените на ссылку на изображение
 	},
 	{
 		timestamps: true,
@@ -19,4 +20,4 @@ const newsSchema = new Schema(
 
 const News = mongoose.model('News', newsSchema)
 
-module.exports = News
+export default News

@@ -27,7 +27,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"yandexWebmaster.js"
+		"yandexWebmaster.js",
+		"app/utils/updateData.mjs"
 	],
 	"exclude": ["node_modules"]
 }

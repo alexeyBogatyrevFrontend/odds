@@ -11,6 +11,7 @@ import Layout from './layouts/Layout'
 import handler from '@/lib/openai'
 import Loader from './components/UI/Loader'
 import sendSitemap from '@/yandexWebmaster'
+import { getAll, getEvents } from './action'
 
 const API_KEY = process.env.NEXT_PUBLIC_ODDS_API_KEY
 

@@ -19,9 +19,9 @@ const initialState: NewsState = {
 export const fetchNews = createAsyncThunk<newsType[], void>(
 	'news/fetchNews',
 	async () => {
-		const response = await axios.get('http://localhost:3002/news/all')
+		const response = await axios.get('http://localhost:3000/api/news/all')
 
-		return response.data
+		return response.data.newsList
 	}
 )
 
