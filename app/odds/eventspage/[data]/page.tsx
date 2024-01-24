@@ -1,4 +1,4 @@
-import { getEvents } from '@/app/action'
+import { fetchEvents } from '@/app/action'
 import Layout from '@/app/layouts/Layout'
 
 import Link from 'next/link'
@@ -45,7 +45,9 @@ const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 	const key = data.split('%26')[1]
 	const group = data.split('%26')[0]
 
-	const games = await getEvents(key)
+	const games = await fetchEvents(key)
+
+	console.log(games)
 
 	return (
 		<Layout>

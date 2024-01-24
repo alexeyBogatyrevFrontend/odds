@@ -4,8 +4,6 @@ import Sports from '../models/data.model'
 import connectDB from '../db'
 import Data from '../models/data.model'
 
-const currentDate = new Date().toISOString().split('T')[0]
-
 export const GET = async () => {
 	try {
 		connectDB()

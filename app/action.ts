@@ -14,57 +14,19 @@ let markets = 'h2h'
 let oddsFormat = 'decimal'
 let regions = 'us'
 
-export const getAll = async () => {
-	const response = await axios.get(
-		'https://api.apilayer.com/odds/sports?all=false',
-		{
-			headers: {
-				apikey: API_KEY,
-			},
-		}
-	)
-
-	const result: RootInterface[] = response.data
-
-	return result
-}
-
-export const getEvents = async (key: string) => {
-	const response = await axios.get(
-		`https://api.apilayer.com/odds/sports/${key}/odds?regions=${regions}&oddsFormat=${oddsFormat}&markets=${markets}&dateFormat=${dateFormat}`,
-		{
-			headers: {
-				apikey: API_KEY,
-			},
-		}
-	)
-
-	const result: RootInterface[] = response.data
-
-	return result
-}
-
-export const getGame = async (key: string) => {
-	const response = await axios.get(
-		`https://api.apilayer.com/odds/sports/${key}/odds?regions=${regions}&oddsFormat=${oddsFormat}&markets=${markets}&dateFormat=${dateFormat}`,
-		{
-			headers: {
-				apikey: API_KEY,
-			},
-		}
-	)
-
-	const result: RootInterface[] = response.data
-
-	return result
-}
-
 // odds
-export const fetchSports = async () => {
-	const response = await axios.get('http://localhost:3000/api/oddsData/sports')
-	const result = response.data
+export const fetchEvents = async (key: string) => {
+	try {
+		const response = await axios.get('http://localhost:3000/api/oddsData/data')
+		const result = response.data.data[0].odds
 
-	return result
+		const events = result.filter(event => event.sport_key === key)
+
+		return events
+	} catch (error) {
+		console.error('Error fetching data:', error.message)
+		throw error // You may want to handle or rethrow the error based on your needs
+	}
 }
 
 // news

@@ -11,7 +11,6 @@ import Layout from './layouts/Layout'
 import handler from '@/lib/openai'
 import Loader from './components/UI/Loader'
 import sendSitemap from '@/yandexWebmaster'
-import { getAll, getEvents } from './action'
 
 const API_KEY = process.env.NEXT_PUBLIC_ODDS_API_KEY
 
@@ -43,9 +42,7 @@ const Page = () => {
 		setIsLoading(true)
 		try {
 			const response = await axios.get('./api/oddsData/data')
-			const result: EventType[] = response.data
-
-			console.log(result)
+			const result: EventType[] = response.data.data[0].sports
 
 			result.forEach(item => {
 				if (item.group === sport)
