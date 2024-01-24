@@ -51,11 +51,8 @@ const oddsSchema = new Schema({
 	],
 })
 
-const currentDate = new Date().toISOString().split('T')[0]
-const Data = mongoose.model(`data_${currentDate}`, {
-	sports: [sportSchema],
-	odds: [oddsSchema],
-})
+const Sport = mongoose.model('Sport', sportSchema)
+const Odds = mongoose.model('Odds', oddsSchema)
 
 export const getAll = async () => {
 	const response = await axios.get(
@@ -89,21 +86,16 @@ export const getEvents = async key => {
 
 const fetchDataAndSaveToDB = async () => {
 	try {
-		let tempData = {
-			sports: [],
-			odds: [],
-		}
-
 		const allData = await getAll()
 
 		for (const sportItem of allData) {
-			tempData.sports.push(sportItem)
+			await Sport.create(sportItem)
 
 			try {
 				const oddsData = await getEvents(sportItem.key)
 
 				for (const oddsItem of oddsData) {
-					tempData.odds.push(oddsItem)
+					await Odds.create(oddsItem)
 				}
 			} catch (error) {
 				if (error.response && error.response.status === 422) {
@@ -117,13 +109,6 @@ const fetchDataAndSaveToDB = async () => {
 				}
 			}
 		}
-
-		const data = new Data({
-			sports: tempData.sports,
-			odds: tempData.odds,
-		})
-
-		await data.save()
 
 		console.log('Данные успешно записаны в базу данных.')
 	} catch (error) {

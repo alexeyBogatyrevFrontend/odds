@@ -4,7 +4,7 @@ import axios from 'axios'
 import { RootInterface } from './odds/eventspage/[data]/page'
 import { MongoClient } from 'mongodb'
 
-const uri = 'ваша_строка_подключения_к_mongodb'
+const uri = 'mongodb://localhost:27017/oddsData'
 const client = new MongoClient(uri)
 
 // odds
@@ -60,9 +60,9 @@ export const getGame = async (key: string) => {
 }
 
 // odds
-export const fetchOdds = async () => {
+export const fetchSports = async () => {
 	const response = await axios.get('http://localhost:3000/api/oddsData/sports')
-	const result = response.data.newsList
+	const result = response.data
 
 	return result
 }

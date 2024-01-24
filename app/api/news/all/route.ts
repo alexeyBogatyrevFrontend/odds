@@ -12,8 +12,8 @@
 // }
 
 import { NextResponse } from 'next/server'
-import connectDB from '../../db'
-import News from '../../news.model'
+import connectDB from '../db'
+import News from '../news.model'
 
 export const GET = async (req: any) => {
 	try {

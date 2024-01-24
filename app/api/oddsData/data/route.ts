@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server'
 
-import Sports from '../models/sports.model'
+import Sports from '../models/data.model'
 import connectDB from '../db'
+import Data from '../models/data.model'
 
-export const GET = async (req: any) => {
+const currentDate = new Date().toISOString().split('T')[0]
+
+export const GET = async () => {
 	try {
 		connectDB()
 
-		const url = new URL(req.url, 'http://localhost:3000')
-
 		return NextResponse.json({
-			sports: await Sports.find(),
+			data: await Data.find(),
 		})
 	} catch (error) {
 		console.log(error)

@@ -26,6 +26,7 @@ export type EventType = {
 
 const Page = () => {
 	const [event, setEvent] = useState<EventType[]>([])
+	const [isLoading, setIsLoading] = useState(false)
 
 	const router = useRouter()
 	const searchParams = useSearchParams()
@@ -37,34 +38,22 @@ const Page = () => {
 
 	const dispatch = useDispatch<AppDispatch>()
 
-	// useEffect(() => {
-	// 	if (status === 'idle') {
-	// 		dispatch(fetchNews())
-	// 	}
-	// }, [status, dispatch])
-
 	const fetchData = async (sport: string) => {
 		setEvent([])
-
+		setIsLoading(true)
 		try {
-			const response = await axios.get(
-				'https://api.apilayer.com/odds/sports?all=false',
-				{
-					headers: {
-						apikey: API_KEY,
-					},
-				}
-			)
-
+			const response = await axios.get('./api/oddsData/data')
 			const result: EventType[] = response.data
+
+			console.log(result)
 
 			result.forEach(item => {
 				if (item.group === sport)
 					setEvent((prev: EventType[]) => [...prev, item])
 			})
+			setIsLoading(false)
 		} catch (error) {
 			console.error('Error fetching data:', error)
-		} finally {
 		}
 	}
 
@@ -83,7 +72,8 @@ const Page = () => {
 	return (
 		<Layout>
 			<h2>Категории спорта</h2>
-			{!event.length && <Loader />}
+			{isLoading && <Loader />}
+			{event.length === 0 && <h3>Данных по данному спорту нет</h3>}
 			{event.length > 0 && <SportItem event={event} />}
 		</Layout>
 	)
