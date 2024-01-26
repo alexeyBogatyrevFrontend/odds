@@ -6,6 +6,7 @@ import React, { FC } from 'react'
 
 import styles from '../EventsPage.module.css'
 import { formatDate } from '@/app/utils/formatDate'
+import { GamesInterface } from '@/app/types'
 
 type EventsPageProps = {
 	params: {
@@ -13,41 +14,11 @@ type EventsPageProps = {
 	}
 }
 
-export type RootInterface = {
-	id: string
-	sport_key: string
-	sport_title: string
-	commence_time: string
-	home_team: string
-	away_team: string
-	bookmakers: Bookmaker[]
-}
-
-export type Bookmaker = {
-	key: string
-	title: string
-	last_update: string
-	markets: Market[]
-}
-
-export type Market = {
-	key: string
-	last_update: string
-	outcomes: Outcome[]
-}
-
-export type Outcome = {
-	name: string
-	price: number
-}
-
 const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 	const key = data.split('%26')[1]
 	const group = data.split('%26')[0]
 
-	const games = await fetchEvents(key)
-
-	console.log(games)
+	const games: GamesInterface[] = await fetchEvents(key)
 
 	return (
 		<Layout>

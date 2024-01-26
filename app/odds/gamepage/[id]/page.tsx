@@ -1,11 +1,12 @@
-import { getGame } from '@/app/action'
-import { RootInterface } from '@/app/odds/eventspage/[data]/page'
+import { fetchEvents } from '@/app/action'
+
 import Layout from '@/app/layouts/Layout'
 import { formatDate } from '@/app/utils/formatDate'
 import { FC } from 'react'
 
 import styles from '../GamePage.module.css'
 import generateText from '@/lib/openai'
+import { GamesInterface } from '@/app/types'
 
 type GamePageProps = {
 	params: {
@@ -17,7 +18,7 @@ const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
 	const key = id.split('%26')[0]
 	const gameId = id.split('%26')[1]
 
-	const games: RootInterface[] = await getGame(key)
+	const games: GamesInterface[] = await fetchEvents(key)
 	const game = games.filter(game => game.id === gameId)[0]
 
 	const date =

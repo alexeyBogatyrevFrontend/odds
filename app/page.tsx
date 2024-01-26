@@ -41,8 +41,9 @@ const Page = () => {
 		setEvent([])
 		setIsLoading(true)
 		try {
-			const response = await axios.get('./api/oddsData/data')
-			const result: EventType[] = response.data.data[0].sports
+			const response = await axios.get('./api/oddsData/sports')
+
+			const result: EventType[] = response.data.sports
 
 			result.forEach(item => {
 				if (item.group === sport)

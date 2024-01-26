@@ -1,8 +1,8 @@
 'use server'
 
 import axios from 'axios'
-import { RootInterface } from './odds/eventspage/[data]/page'
 import { MongoClient } from 'mongodb'
+import { GamesInterface } from './types'
 
 const uri = 'mongodb://localhost:27017/oddsData'
 const client = new MongoClient(uri)
@@ -17,15 +17,15 @@ let regions = 'us'
 // odds
 export const fetchEvents = async (key: string) => {
 	try {
-		const response = await axios.get('http://localhost:3000/api/oddsData/data')
-		const result = response.data.data[0].odds
+		const response = await axios.get('http://localhost:3000/api/oddsData/odds')
+		const result: GamesInterface[] = response.data.odds
 
 		const events = result.filter(event => event.sport_key === key)
 
 		return events
-	} catch (error) {
+	} catch (error: any) {
 		console.error('Error fetching data:', error.message)
-		throw error // You may want to handle or rethrow the error based on your needs
+		throw error
 	}
 }
 

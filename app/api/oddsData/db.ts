@@ -1,4 +1,3 @@
-// utils/db.js
 import mongoose from 'mongoose'
 
 const MONGODB_URI = 'mongodb://localhost:27017/oddsData'
