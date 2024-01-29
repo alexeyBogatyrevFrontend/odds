@@ -29,6 +29,7 @@ interface Odds {
 			}[]
 		}[]
 	}[]
+	gptText: string
 }
 
 interface DataDocument extends Document {
@@ -71,6 +72,7 @@ const oddsSchema = new Schema<Odds>({
 			],
 		},
 	],
+	gptText: String,
 })
 
 const currentDate = new Date().toISOString().split('T')[0]

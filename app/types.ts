@@ -7,6 +7,7 @@ export type GamesInterface = {
 	home_team: string
 	away_team: string
 	bookmakers: Bookmaker[]
+	gptText?: string
 }
 
 export type Bookmaker = {

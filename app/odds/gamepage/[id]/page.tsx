@@ -14,6 +14,23 @@ type GamePageProps = {
 	}
 }
 
+export async function generateMetadata({ params: { id } }: GamePageProps) {
+	const key = id.split('%26')[0]
+	const gameId = id.split('%26')[1]
+
+	const games: GamesInterface[] = await fetchEvents(key)
+	const game = games.filter(game => game.id === gameId)[0]
+
+	const title = `${game.home_team} VS ${game.away_team} | ${game.sport_title}`
+	const description =
+		`${game.gptText?.split('.')[0]}` + `${game.gptText?.split('.')[1]}`
+
+	return {
+		title: title,
+		description: description,
+	}
+}
+
 const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
 	const key = id.split('%26')[0]
 	const gameId = id.split('%26')[1]
@@ -25,7 +42,8 @@ const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
 		formatDate(game.commence_time).dayOfMonth +
 		' ' +
 		formatDate(game.commence_time).month
-	const generatedText = await generateText(game.home_team, game.away_team, date)
+
+	// const generatedText = await generateText(game.home_team, game.away_team, date)
 
 	return (
 		<Layout>
@@ -57,7 +75,7 @@ const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
 					</div>
 
 					<div className='text-gray-400 text-center text-sm bg-gray-200  p-6 rounded-xl my-4'>
-						<p>{generatedText}</p>
+						<p>{game.gptText}</p>
 					</div>
 
 					<div className='proposal mb-8'>
