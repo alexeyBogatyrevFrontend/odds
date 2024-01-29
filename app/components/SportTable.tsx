@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { EventType } from '../page'
 import Link from 'next/link'
+import { EventType } from '@/types'
 
 type SportTableProps = {
 	event: EventType[]

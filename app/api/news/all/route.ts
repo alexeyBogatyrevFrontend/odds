@@ -7,8 +7,13 @@ export const GET = async (req: any) => {
 		await connectDBNews()
 
 		const url = new URL(req.url, 'http://localhost:3000')
-		const page = parseInt(url.searchParams.get('page')) || 1
-		const pageSize = parseInt(url.searchParams.get('pageSize')) || 6
+		const pageQueryParam = url.searchParams.get('page')
+		const pageSizeQueryParam = url.searchParams.get('pageSize')
+
+		const page = parseInt(pageQueryParam !== null ? pageQueryParam : '1')
+		const pageSize = parseInt(
+			pageSizeQueryParam !== null ? pageSizeQueryParam : '6'
+		)
 
 		if (!page && !pageSize) {
 			const allNews = await News.find()

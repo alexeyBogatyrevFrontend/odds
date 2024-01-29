@@ -1,7 +1,8 @@
 import React, { FC } from 'react'
-import { EventType } from '@/app/page'
+
 import Link from 'next/link'
 import styles from './SportItem.module.css'
+import { EventType } from '@/types'
 
 type SportItemProps = {
 	event: EventType[]
