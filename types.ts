@@ -1,3 +1,12 @@
+// sports
+export type EventType = {
+	key: string
+	group: string
+	title: string
+	description: string
+	active: boolean
+	has_outrights: boolean
+}
 // odds
 export type GamesInterface = {
 	id: string

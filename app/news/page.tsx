@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../layouts/Layout'
 
-import { RootState, newsType } from '../types'
+import { RootState, newsType } from '../../types'
 import NewsItem from './NewsItem/NewsItem'
 
 import styles from './all-news.module.css'

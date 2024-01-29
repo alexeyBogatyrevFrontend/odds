@@ -1,7 +1,7 @@
-const axios = require('axios')
-const fs = require('fs').promises
-const { exec } = require('child_process')
-const cron = require('node-cron')
+import axios from 'axios'
+import fs from 'fs/promises'
+import { exec } from 'child_process'
+import cron from 'node-cron'
 
 // Замените API_KEY на ваш реальный ключ
 const API_KEY = 'zfme0kbYPxejRvJvTdv5gs0LfaadXMSF'
@@ -48,7 +48,7 @@ const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
 async function generateAndSaveSitemap() {
 	try {
 		const response = await axios.get(
-			'https://api.apilayer.com/odds/sports?all=false',
+			'http://localhost:3000/api/oddsData/sports',
 			{
 				headers: {
 					apikey: API_KEY,
@@ -56,7 +56,7 @@ async function generateAndSaveSitemap() {
 			}
 		)
 
-		const events = response.data
+		const events = response.data.sports
 
 		// Генерируем sitemap
 		const sitemapContent = await generateSitemapContent(events, baseUrl)
@@ -71,7 +71,7 @@ async function generateAndSaveSitemap() {
 		// Сохраняем sitemap в файл
 		await fs.writeFile(fileName, sitemapContent, 'utf-8')
 
-		await sendSitemap(apiToken, user_id, host_id, sitemapPath)
+		// await sendSitemap(apiToken, user_id, host_id, sitemapPath)
 
 		exec('pm2 restart all', (error, stdout, stderr) => {
 			if (error) {
@@ -82,7 +82,7 @@ async function generateAndSaveSitemap() {
 		})
 		console.log('Sitemap успешно сохранен в файл sitemap.xml')
 	} catch (error) {
-		console.error('Ошибка при получении данных:', error.message)
+		console.error('Ошибка при получении данных:', error)
 	}
 }
 
@@ -123,19 +123,20 @@ ${sitemapEntries}
 
 // Функция для получения данных для конкретного события
 async function getGame(key) {
-	const response = await axios.get(
-		`https://api.apilayer.com/odds/sports/${key}/odds?regions=${regions}&oddsFormat=${oddsFormat}&markets=${markets}&dateFormat=${dateFormat}`,
-		{
-			headers: {
-				apikey: API_KEY,
-			},
-		}
-	)
+	try {
+		const response = await axios.get('http://localhost:3000/api/oddsData/odds')
+		const result = response.data.odds
 
-	return response.data
+		const events = result.filter(event => event.sport_key === key)
+
+		return events
+	} catch (error) {
+		console.error('Error fetching data:', error.message)
+		throw error
+	}
 }
 
-// generateAndSaveSitemap()
-cron.schedule('35 13 * * *', () => {
-	generateAndSaveSitemap()
-})
+generateAndSaveSitemap()
+// cron.schedule('35 13 * * *', () => {
+// 	generateAndSaveSitemap()
+// })

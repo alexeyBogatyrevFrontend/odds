@@ -5,23 +5,12 @@ import axios from 'axios'
 import SportItem from './components/SportItem/SportItem'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, sportState } from './types'
-import { AppDispatch, fetchNews } from '@/lib/slices/newsSlice'
+import { EventType, RootState, sportState } from '../types'
+import { AppDispatch } from '@/lib/slices/newsSlice'
 import Layout from './layouts/Layout'
-import handler from '@/lib/openai'
 import Loader from './components/UI/Loader'
-import sendSitemap from '@/yandexWebmaster'
 
 const API_KEY = process.env.NEXT_PUBLIC_ODDS_API_KEY
-
-export type EventType = {
-	key: string
-	group: string
-	title: string
-	description: string
-	active: boolean
-	has_outrights: boolean
-}
 
 const Page = () => {
 	const [event, setEvent] = useState<EventType[]>([])
@@ -49,9 +38,10 @@ const Page = () => {
 				if (item.group === sport)
 					setEvent((prev: EventType[]) => [...prev, item])
 			})
-			setIsLoading(false)
 		} catch (error) {
 			console.error('Error fetching data:', error)
+		} finally {
+			setIsLoading(false)
 		}
 	}
 

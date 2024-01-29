@@ -6,7 +6,7 @@ import React, { FC } from 'react'
 
 import styles from '../EventsPage.module.css'
 import { formatDate } from '@/app/utils/formatDate'
-import { GamesInterface } from '@/app/types'
+import { GamesInterface } from '@/types'
 
 type EventsPageProps = {
 	params: {

@@ -1,6 +1,6 @@
 import { fetchNews } from '@/app/action'
 import Layout from '@/app/layouts/Layout'
-import { newsType } from '@/app/types'
+import { newsType } from '@/types'
 import { arrayBufferToBase64 } from '@/app/utils/arrayBufferToBase64'
 import dayjs from 'dayjs'
 import Image from 'next/image'

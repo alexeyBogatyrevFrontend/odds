@@ -7,6 +7,7 @@
 		"strict": true,
 		"noEmit": true,
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"module": "esnext",
 		"moduleResolution": "bundler",
 		"resolveJsonModule": true,
@@ -28,7 +29,8 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"yandexWebmaster.js",
-		"app/utils/updateData.mjs"
+		"app/utils/updateData.mjs",
+		"sitemap.еs"
 	],
 	"exclude": ["node_modules"]
 }

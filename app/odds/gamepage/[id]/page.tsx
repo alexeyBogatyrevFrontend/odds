@@ -6,7 +6,7 @@ import { FC } from 'react'
 
 import styles from '../GamePage.module.css'
 import generateText from '@/lib/openai'
-import { GamesInterface } from '@/app/types'
+import { GamesInterface } from '@/types'
 
 type GamePageProps = {
 	params: {
@@ -22,8 +22,7 @@ export async function generateMetadata({ params: { id } }: GamePageProps) {
 	const game = games.filter(game => game.id === gameId)[0]
 
 	const title = `${game.home_team} VS ${game.away_team} | ${game.sport_title}`
-	const description =
-		`${game.gptText?.split('.')[0]}` + `${game.gptText?.split('.')[1]}`
+	const description = `${game.gptText?.split('.').slice(0, 2).join('.') + '.'}`
 
 	return {
 		title: title,

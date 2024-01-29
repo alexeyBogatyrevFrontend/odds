@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { MongoClient } from 'mongodb'
-import { GamesInterface } from './types'
+import { GamesInterface } from '../types'
 
 const uri = 'mongodb://localhost:27017/oddsData'
 const client = new MongoClient(uri)

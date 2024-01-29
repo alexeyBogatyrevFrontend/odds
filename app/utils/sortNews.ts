@@ -1,4 +1,4 @@
-import { newsType } from '../types'
+import { newsType } from '../../types'
 
 export const sortNews = (a: newsType, b: newsType, sortOrder: string) => {
 	const dateA = new Date(a.date!)

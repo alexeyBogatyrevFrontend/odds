@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import NewsItem from '../NewsItem/NewsItem'
 import styles from './NewsList.module.css'
-import { RootState } from '@/app/types'
+import { RootState } from '@/types'
 import Loader from '@/app/components/UI/Loader'
 import Link from 'next/link'
 

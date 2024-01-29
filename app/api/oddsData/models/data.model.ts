@@ -82,8 +82,6 @@ const DataSchema = new Schema<DataDocument>({
 	odds: [oddsSchema],
 })
 
-// mongoose.models = {}
-
 const Data: Model<DataDocument> =
 	mongoose.models[`data_${currentDate}`] ||
 	mongoose.model(`data_${currentDate}`, DataSchema)

@@ -1,5 +1,6 @@
 // models/news.model.js
-const mongoose = require('mongoose')
+
+import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
@@ -18,6 +19,6 @@ const newsSchema = new Schema(
 	}
 )
 
-const News = mongoose.model('News', newsSchema)
+const News = mongoose.models['News'] || mongoose.model('News', newsSchema)
 
 export default News

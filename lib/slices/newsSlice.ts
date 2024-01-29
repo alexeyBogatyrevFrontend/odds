@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-import { newsType } from '../../app/types'
+import { newsType } from '../../types'
 import store from '../store'
 
 type NewsState = {

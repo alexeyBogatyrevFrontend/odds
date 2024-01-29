@@ -1,10 +1,11 @@
 import axios from 'axios'
 import mongoose from 'mongoose'
 import OpenAI from 'openai'
+import 'dotenv/config'
 import cron from 'node-cron'
 
 // format Date
-export const formatDate = commenceTime => {
+const formatDate = commenceTime => {
 	const date = new Date(commenceTime)
 	const now = new Date()
 
@@ -36,18 +37,17 @@ export const formatDate = commenceTime => {
 
 // openai
 const openai = new OpenAI({
-	apiKey: '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',
+	apiKey: process.env.OPENAI_API_KEY,
 })
-
 const generateText = async (first, second, date) => {
-	const text = `Напиши анонс спортивного матча ${first} VS ${second} который состоится ${date} (Перевед команд и даты на русский, не больше 7 предложений)`
+	const prompt = `Напиши анонс спортивного матча ${first} VS ${second} который состоится ${date} (Переведи название команды и даты на русский, напиши не больше 7 предложений)`
 
 	const chatCompletion = await openai.chat.completions.create({
 		model: 'gpt-3.5-turbo',
 		messages: [
 			{
 				role: 'user',
-				content: text,
+				content: prompt,
 			},
 		],
 	})
@@ -113,7 +113,7 @@ const Data = mongoose.model(`data_${currentDate}`, {
 	odds: [oddsSchema],
 })
 
-export const getAll = async () => {
+const getAll = async () => {
 	const response = await axios.get(
 		'https://api.apilayer.com/odds/sports?all=false',
 		{
@@ -128,7 +128,7 @@ export const getAll = async () => {
 	return result
 }
 
-export const getEvents = async key => {
+const getEvents = async key => {
 	const response = await axios.get(
 		`https://api.apilayer.com/odds/sports/${key}/odds?regions=${regions}&oddsFormat=${oddsFormat}&markets=${markets}&dateFormat=${dateFormat}`,
 		{
@@ -142,58 +142,6 @@ export const getEvents = async key => {
 
 	return result
 }
-
-// const fetchDataAndSaveToDB = async () => {
-// 	try {
-// 		let tempData = {
-// 			sports: [],
-// 			odds: [],
-// 		}
-
-// 		const allData = await getAll()
-
-// 		for (const sportItem of allData) {
-// 			tempData.sports.push(sportItem)
-
-// 			try {
-// 				const oddsData = await getEvents(sportItem.key)
-
-// 				for (const oddsItem of oddsData) {
-// 					tempData.odds.push(oddsItem)
-// 				}
-// 			} catch (error) {
-// 				if (error.response && error.response.status === 422) {
-// 					console.log(
-// 						`Произошла ошибка 422 для ${sportItem.key}. Продолжение...`
-// 					)
-// 					// Можно добавить дополнительную обработку, если это необходимо
-// 				} else {
-// 					// Распечатайте остальные ошибки
-// 					console.error(error)
-// 				}
-// 			}
-// 		}
-
-// 		const data = new Data({
-// 			sports: tempData.sports,
-// 			odds: tempData.odds,
-// 		})
-
-// 		await data.save()
-
-// 		console.log('Данные успешно записаны в базу данных.')
-// 	} catch (error) {
-// 		// Распечатайте ошибку, чтобы увидеть подробности
-// 		console.error(error)
-// 	}
-// }
-
-// Расписание выполнения задачи (раз в день)
-// cron.schedule('0 0 * * *', async () => {
-// 	await fetchDataAndSaveToDB()
-// })
-
-// Запуск задачи вручную при старте скрипта
 
 const fetchDataAndSaveToDB = async () => {
 	try {

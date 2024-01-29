@@ -9,16 +9,7 @@ import Footer from '../components/Footer/Footer'
 import SportsCategoryList from '../odds/sportsCategory/SportsCategoryList/SportsCategoryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, fetchNews } from '@/lib/slices/newsSlice'
-import { RootState } from '../types'
-
-export type EventType = {
-	key: string
-	group: string
-	title: string
-	description: string
-	active: boolean
-	has_outrights: boolean
-}
+import { RootState } from '../../types'
 
 type LayoutType = {
 	children: ReactNode
