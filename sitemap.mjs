@@ -11,12 +11,12 @@ const oddsFormat = 'decimal'
 const markets = 'h2h'
 const dateFormat = 'iso'
 
-const baseUrl = 'https://test.seo-team.org' // Замените на ваш базовый URL
+const baseUrl = 'https://sport-odds.top' // Замените на ваш базовый URL
 
 const apiToken = 'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA'
 const user_id = 1167705533
 const host_id = 'https:test.seo-team.org:443'
-// const sitemapPath = 'https://test.seo-team.org/sitemap.xml'
+// const sitemapPath = 'https://sport-odds.top/sitemap.xml'
 
 const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
 	try {
@@ -66,12 +66,12 @@ async function generateAndSaveSitemap() {
 			.replace(/:/g, '-')
 			.replace(/\./g, '-')
 		const fileName = `./public/sitemap_${currentDate}.xml`
-		const sitemapPath = `https://test.seo-team.org/sitemap_${currentDate}.xml`
+		const sitemapPath = `https://sport-odds.top/sitemap_${currentDate}.xml`
 
 		// Сохраняем sitemap в файл
 		await fs.writeFile(fileName, sitemapContent, 'utf-8')
 
-		// await sendSitemap(apiToken, user_id, host_id, sitemapPath)
+		await sendSitemap(apiToken, user_id, host_id, sitemapPath)
 
 		exec('pm2 restart all', (error, stdout, stderr) => {
 			if (error) {

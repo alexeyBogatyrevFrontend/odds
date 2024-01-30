@@ -4,7 +4,7 @@ const fs = require('fs')
 const apiToken = 'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA'
 const user_id = 1167705533
 const host_id = 'https:test.seo-team.org:443'
-const sitemapPath = 'https://test.seo-team.org/sitemap.xml'
+const sitemapPath = 'https://sport-odds.top/sitemap.xml'
 
 // get statistics
 const query_indicator = 'TOTAL_SHOWS'
@@ -14,10 +14,10 @@ const date_to = '2023-12-31'
 
 // indexNow
 const url =
-	'https://test.seo-team.org/odds/gamepage/basketball_euroleague&ae82fbfae76e43711bc86e08a0be6c45?category=Basketball'
+	'https://sport-odds.top/odds/gamepage/basketball_euroleague&ae82fbfae76e43711bc86e08a0be6c45?category=Basketball'
 const key = 'EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX'
 const keyLocation =
-	'https://test.seo-team.org/EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX.txt'
+	'https://sport-odds.top/EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX.txt'
 
 const getStatistics = async (
 	apiToken,
