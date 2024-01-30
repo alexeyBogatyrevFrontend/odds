@@ -1,7 +1,7 @@
 // utils/db.js
 import mongoose from 'mongoose'
 
-const MONGODB_URI_NEWS = 'mongodb://localhost:27017/odds'
+const MONGODB_URI_NEWS = 'mongodb://odds:27017/odds'
 
 const connectDB = async () => {
 	if (mongoose.connections[0].readyState) return
