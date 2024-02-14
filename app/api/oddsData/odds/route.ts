@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
 
 import Data from '../models/data.model'
-import connectDBOddsData from '../db'
+import connectDB from '../db'
 
 export const GET = async () => {
-	await connectDBOddsData()
+	await connectDB()
 	try {
 		const currentDate = new Date().toISOString().split('T')[0]
 		const collectionName = `data_${currentDate}`

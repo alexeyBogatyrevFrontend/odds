@@ -17,7 +17,8 @@ let regions = 'us'
 // odds
 export const fetchEvents = async (key: string) => {
 	try {
-		const response = await axios.get('http://localhost:3000/api/oddsData/odds')
+		const response = await axios.get('https://sport-odds.top/api/oddsData/odds')
+
 		const result: GamesInterface[] = response.data.odds
 
 		const events = result.filter(event => event.sport_key === key)
