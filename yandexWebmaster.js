@@ -3,14 +3,57 @@ const fs = require('fs')
 
 const apiToken = 'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA'
 const user_id = 1167705533
-const host_id = 'https:test.seo-team.org:443'
+const host_id = 'https:sport-odds.top:443'
 const sitemapPath = 'https://sport-odds.top/sitemap.xml'
 
-// get statistics
-const query_indicator = 'TOTAL_SHOWS'
-const device_type_indicator = 'ALL'
-const date_from = '2023-01-01'
-const date_to = '2023-12-31'
+const getUserID = async () => {
+	try {
+		const response = await axios.get(
+			'https://api.webmaster.yandex.net/v4/user',
+			{
+				headers: {
+					Authorization: `OAuth ${apiToken}`,
+				},
+			}
+		)
+
+		if (response.status === 200) {
+			const { user_id } = response.data
+			console.log('User ID:', user_id)
+			return user_id
+		} else {
+			throw new Error(`Failed to fetch user ID: ${response.status}`)
+		}
+	} catch (error) {
+		console.error('Error fetching user ID:', error.message)
+		throw error
+	}
+}
+// getUserID()
+const getHostsList = async () => {
+	try {
+		const response = await axios.get(
+			`https://api.webmaster.yandex.net/v4/user/${user_id}/hosts`,
+			{
+				headers: {
+					Authorization: `OAuth ${apiToken}`,
+				},
+			}
+		)
+
+		if (response.status === 200) {
+			const hosts = response.data.hosts
+			console.log('Hosts List:', hosts)
+			return hosts
+		} else {
+			throw new Error(`Failed to fetch hosts list: ${response.status}`)
+		}
+	} catch (error) {
+		console.error('Error fetching hosts list:', error.message)
+		throw error
+	}
+}
+// getHostsList()
 
 // indexNow
 const url =
@@ -18,52 +61,6 @@ const url =
 const key = 'EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX'
 const keyLocation =
 	'https://sport-odds.top/EdD8dkmdNLlxREi2LkhJjYOH2kyQbJqM3cBKT5fX.txt'
-
-const getStatistics = async (
-	apiToken,
-	user_id,
-	host_id,
-	query_indicator,
-	device_type_indicator,
-	date_from,
-	date_to
-) => {
-	try {
-		const headers = {
-			Authorization: `OAuth ${apiToken}`,
-			'Content-Type': 'application/json', // Указываем тип данных в заголовке
-		}
-
-		// Параметры запроса
-		const queryParams = {
-			query_indicator,
-			device_type_indicator,
-			date_from,
-			date_to,
-		}
-
-		const response = await axios.get(
-			`https://api.webmaster.yandex.net/v4/user/${user_id}/hosts/${host_id}/search-queries/all/history`,
-			{ headers, params: queryParams }
-		)
-
-		console.log(response.data)
-		return response.data
-	} catch (error) {
-		console.error('Error getting search queries history:', error.message)
-		throw error
-	}
-}
-
-// getStatistics(
-// 	apiToken,
-// 	user_id,
-// 	host_id,
-// 	query_indicator,
-// 	device_type_indicator,
-// 	date_from,
-// 	date_to
-// )
 
 const sendIndexNowRequest = async (url, key, keyLocation) => {
 	try {
@@ -93,4 +90,4 @@ const sendIndexNowRequest = async (url, key, keyLocation) => {
 
 // Пример использования
 
-sendIndexNowRequest(url, key, keyLocation)
+// sendIndexNowRequest(url, key, keyLocation)

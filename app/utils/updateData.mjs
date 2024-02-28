@@ -175,6 +175,8 @@ const fetchDataAndSaveToDB = async () => {
 						...oddsItem,
 						gptText: generatedText,
 					})
+
+					console.log(tempData.sports.length)
 				}
 			} catch (error) {
 				if (error.response && error.response.status === 422) {
@@ -204,6 +206,7 @@ const fetchDataAndSaveToDB = async () => {
 }
 
 fetchDataAndSaveToDB()
+
 // cron.schedule('* 0 * * *', () => {
 // 	fetchDataAndSaveToDB()
 // })

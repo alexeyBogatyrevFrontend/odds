@@ -15,8 +15,7 @@ const baseUrl = 'https://sport-odds.top' // Замените на ваш баз�
 
 const apiToken = 'y0_AgAAAABFmcW9AAsZzgAAAAD3rOq2PyK6dSjjTvm_lAalyiv4f0yS-zA'
 const user_id = 1167705533
-const host_id = 'https:test.seo-team.org:443'
-// const sitemapPath = 'https://sport-odds.top/sitemap.xml'
+const host_id = 'https:sport-odds.top:443'
 
 const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
 	try {
@@ -42,13 +41,12 @@ const sendSitemap = async (apiToken, user_id, host_id, sitemapPath) => {
 		throw error
 	}
 }
-// { sitemap_id: '27985acc-05d6-3201-a601-be84c1ea56b4' }
 
 // Асинхронная функция для генерации и сохранения sitemap в файл
 async function generateAndSaveSitemap() {
 	try {
 		const response = await axios.get(
-			'http://localhost:3000/api/oddsData/sports',
+			'https://sport-odds.top/api/oddsData/sports',
 			{
 				headers: {
 					apikey: API_KEY,
@@ -124,7 +122,7 @@ ${sitemapEntries}
 // Функция для получения данных для конкретного события
 async function getGame(key) {
 	try {
-		const response = await axios.get('http://localhost:3000/api/oddsData/odds')
+		const response = await axios.get('https://sport-odds.top/api/oddsData/odds')
 		const result = response.data.odds
 
 		const events = result.filter(event => event.sport_key === key)
