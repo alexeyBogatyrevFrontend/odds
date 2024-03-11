@@ -87,30 +87,9 @@ async function generateAndSaveSitemap() {
 // Функция для генерации содержимого sitemap
 async function generateSitemapContent(events, baseUrl) {
 	let sitemapEntries = ''
-	const addedGroups = new Set()
 
 	// Обходим каждое событие
 	for (const event of events) {
-		// Проверяем, была ли уже добавлена группа категорий спорта
-		if (!addedGroups.has(event.group)) {
-			const categoryUrl = `${baseUrl}/odds/sports/${encodeURIComponent(
-				event.group
-			)}?category=${encodeURIComponent(event.group)}`
-
-			sitemapEntries += `  <url><loc>${categoryUrl}</loc></url>\n`
-			console.log('Category URL:', categoryUrl)
-			addedGroups.add(event.group) // Добавляем группу в множество добавленных групп
-		}
-
-		const eventsPage = `${baseUrl}/odds/eventspage/${encodeURIComponent(
-			event.group
-		)}&amp;${encodeURIComponent(event.key)}?category=${encodeURIComponent(
-			event.group
-		)}`
-
-		sitemapEntries += `  <url><loc>${eventsPage}</loc></url>\n`
-		console.log('eventsPage:', eventsPage)
-
 		try {
 			const gameData = await getGame(event.key)
 			const gameIds = gameData.map(data => data.id)
