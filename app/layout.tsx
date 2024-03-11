@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 	title: 'Спортивные события в России и Мире',
 	description:
 		'Разбирайтесь в спорте с умом – наш сайт предоставляет высокоточные аналитические данные, помогая фанатам и ставочникам делать осознанные решения и оставаться в курсе последних трендов в мире спорта.',
+	robots: 'all',
 }
 
 export default function RootLayout({
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
 	return (
 		<StoreProvider>
-			<html lang='en'>
+			<html lang='ru'>
 				<body className={inter.className}>{children}</body>
 			</html>
 		</StoreProvider>

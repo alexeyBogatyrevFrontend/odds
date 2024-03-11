@@ -10,6 +10,8 @@ import SportsCategoryList from '../odds/sportsCategory/SportsCategoryList/Sports
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, fetchNews } from '@/lib/slices/newsSlice'
 import { RootState } from '../../types'
+import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 type LayoutType = {
 	children: ReactNode
@@ -23,6 +25,11 @@ const Layout: FC<LayoutType> = ({ children }) => {
 	// 	if (!newsList.length) dispatch(fetchNews())
 	// }, [dispatch])
 
+	// const router = useRouter()
+	const searchParams = useSearchParams()
+
+	const category = searchParams.get('category')
+
 	return (
 		<div className='mainWrapper'>
 			<Header />
@@ -34,7 +41,7 @@ const Layout: FC<LayoutType> = ({ children }) => {
 							<TopNewsList />
 						</div>
 						<div className='right'>
-							{children}
+							<>{children}</>
 							<NewsList />
 						</div>
 					</div>

@@ -37,7 +37,8 @@ const SportsCategoryItem: FC<SportsCategoryItemProps> = ({
 
 	return (
 		<Link
-			href={`/?category=${item.category}`}
+			// href={`/?category=${item.category}`}
+			href={`/odds/sports/${item.category}/?category=${item.category}`}
 			aria-disabled={true}
 			className={`${styles.block} ${
 				active === item.category ? styles.active : ''

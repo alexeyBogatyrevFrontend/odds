@@ -8,6 +8,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"sitemap": "node sitemap.mjs",
+		"test": "node test.mjs",
 		"yandex": "node yandexWebmaster.js",
 		"getData": "node ./app/utils/updateData.mjs"
 	},

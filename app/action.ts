@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { MongoClient } from 'mongodb'
-import { GamesInterface } from '../types'
+import { EventType, GamesInterface } from '../types'
 
 const uri = 'mongodb://127.0.0.1:27017/'
 const client = new MongoClient(uri)
@@ -14,6 +14,24 @@ let markets = 'h2h'
 let oddsFormat = 'decimal'
 let regions = 'us'
 
+// sports
+export const fetchSports = async (key: string) => {
+	try {
+		const response = await axios.get(
+			'https://sport-odds.top/api/oddsData/sports'
+		)
+
+		const result: EventType[] = response.data.sports
+
+		const sports = result.filter(sport => sport.group === key)
+
+		return sports
+	} catch (error: any) {
+		console.error('Error fetching data:', error.message)
+		throw error
+	}
+}
+
 // odds
 export const fetchEvents = async (key: string) => {
 	try {
@@ -22,6 +40,8 @@ export const fetchEvents = async (key: string) => {
 		const result: GamesInterface[] = response.data.odds
 
 		const events = result.filter(event => event.sport_key === key)
+
+		// console.log(response.data)
 
 		return events
 	} catch (error: any) {
