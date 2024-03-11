@@ -1,16 +1,33 @@
-import { fetchEvents, fetchSports } from '@/app/action'
+import { fetchSports } from '@/app/action'
 import Layout from '@/app/layouts/Layout'
-
-import Link from 'next/link'
 import React, { FC } from 'react'
 
-import { formatDate } from '@/app/utils/formatDate'
-import { EventType, GamesInterface } from '@/types'
+import { EventType } from '@/types'
 import SportItem from '@/app/components/SportItem/SportItem'
 
 type SportsPageProps = {
 	params: {
 		category: string
+	}
+}
+
+export async function generateMetadata({
+	params: { category },
+}: SportsPageProps) {
+	const sports = {
+		Soccer: 'Футбол',
+		Basketball: 'Баскетбол',
+		Tennis: 'Тенис',
+		'Ice%20Hockey': 'Хоккей',
+		Cricket: 'Крикет',
+		Boxing: 'Бокс',
+	}
+
+	// @ts-expect-error something wrong
+	const title = `Спортивные события в России и Мире - ${sports[category]}`
+
+	return {
+		title: title,
 	}
 }
 
@@ -25,7 +42,10 @@ const SportsPage: FC<SportsPageProps> = async ({ params: { category } }) => {
 	return (
 		<Layout>
 			{sports.length ? (
-				<SportItem event={sports} />
+				<>
+					<h2>Категории спорта</h2>
+					<SportItem event={sports} />
+				</>
 			) : (
 				<h3 className='mb-8'>Данных по данному спорту сейчас нет</h3>
 			)}

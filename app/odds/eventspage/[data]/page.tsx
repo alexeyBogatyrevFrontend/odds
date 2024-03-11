@@ -14,6 +14,26 @@ type EventsPageProps = {
 	}
 }
 
+export async function generateMetadata({ params: { data } }: EventsPageProps) {
+	const group = data.split('%26')[0]
+
+	const sports = {
+		Soccer: 'Футбол',
+		Basketball: 'Баскетбол',
+		Tennis: 'Тенис',
+		'Ice%20Hockey': 'Хоккей',
+		Cricket: 'Крикет',
+		Boxing: 'Бокс',
+	}
+
+	// @ts-expect-error something wrong
+	const title = `Спортивные события в России и Мире - ${sports[group]}`
+
+	return {
+		title: title,
+	}
+}
+
 const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 	const key = data.split('%26')[1]
 	const group = data.split('%26')[0]
