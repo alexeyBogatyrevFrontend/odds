@@ -8,7 +8,7 @@ const Page = async () => {
 	return (
 		<Layout>
 			<>
-				<h2>Категории спорта</h2>
+				<h1>Матч-центр</h1>
 				<SportItem event={sports} />
 			</>
 		</Layout>

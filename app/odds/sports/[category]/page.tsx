@@ -11,23 +11,26 @@ type SportsPageProps = {
 	}
 }
 
+const sportsName = {
+	Soccer: 'Футбол',
+	Basketball: 'Баскетбол',
+	Tennis: 'Тенис',
+	'Ice%20Hockey': 'Хоккей',
+	Cricket: 'Крикет',
+	Boxing: 'Бокс',
+}
+
 export async function generateMetadata({
 	params: { category },
 }: SportsPageProps) {
-	const sports = {
-		Soccer: 'Футбол',
-		Basketball: 'Баскетбол',
-		Tennis: 'Тенис',
-		'Ice%20Hockey': 'Хоккей',
-		Cricket: 'Крикет',
-		Boxing: 'Бокс',
-	}
-
 	// @ts-expect-error something wrong
-	const title = `Спортивные события в России и Мире - ${sports[category]}`
+	const title = `${sportsName[category]} онлайн сегодня - прямая трансляция матчей, результаты,  расписанией на сегодня/завтра и статистика`
+	// @ts-expect-error something wrong
+	const description = `${sportsName[category]}: результаты всех матчей, прямые онлайн видео трансляции, расписания турниров, статистика, прогнозы. Смотри всю информацию о матчах на портале sport-odds.top`
 
 	return {
-		title: title,
+		title,
+		description,
 	}
 }
 
@@ -43,7 +46,8 @@ const SportsPage: FC<SportsPageProps> = async ({ params: { category } }) => {
 		<Layout>
 			{sports.length ? (
 				<>
-					<h2>Категории спорта</h2>
+					{/* @ts-expect-error something wrong */}
+					<h1>{sportsName[category]} онлайн сегодня</h1>
 					<SportItem event={sports} />
 				</>
 			) : (

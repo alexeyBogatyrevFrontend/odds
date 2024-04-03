@@ -7,6 +7,7 @@ import React, { FC } from 'react'
 import styles from '../EventsPage.module.css'
 import { formatDate } from '@/app/utils/formatDate'
 import { GamesInterface } from '@/types'
+import { formattedDate } from '@/app/layout'
 
 type EventsPageProps = {
 	params: {
@@ -15,22 +16,15 @@ type EventsPageProps = {
 }
 
 export async function generateMetadata({ params: { data } }: EventsPageProps) {
-	const group = data.split('%26')[0]
+	const key = data.split('%26')[1]
+	const games: GamesInterface[] = await fetchEvents(key)
 
-	const sports = {
-		Soccer: 'Футбол',
-		Basketball: 'Баскетбол',
-		Tennis: 'Тенис',
-		'Ice%20Hockey': 'Хоккей',
-		Cricket: 'Крикет',
-		Boxing: 'Бокс',
-	}
-
-	// @ts-expect-error something wrong
-	const title = `Спортивные события в России и Мире - ${sports[group]}`
+	const title = `${games[0].sport_title} ${formattedDate}: прямая онлайн трансляция, статистика матча, прогнозы`
+	const description = `${games[0].sport_title} ${formattedDate}: смотреть онлайн трансляцию матча в прямом эфире. Вся информация о матче: статистика, прогнозы, новости, видео, интервью. `
 
 	return {
-		title: title,
+		title,
+		description,
 	}
 }
 
@@ -39,16 +33,19 @@ const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 	const group = data.split('%26')[0]
 
 	const games: GamesInterface[] = await fetchEvents(key)
+	// console.log(games)
 
 	return (
 		<Layout>
 			{games.length > 0 && (
 				<div className='mb-8'>
-					<h2>Спортивные события</h2>
+					<h1>
+						{games[0].sport_title} {formattedDate}
+					</h1>
 					<div className={styles.wrapper}>
 						{games.map((game, index) => (
 							<Link
-								href={`/odds/gamepage/${key}&${game.id}?category=${group}`}
+								href={`/odds/gamepage/${group}&${key}&${game.id}?category=${group}`}
 								key={index}
 							>
 								<div className={styles.block}>

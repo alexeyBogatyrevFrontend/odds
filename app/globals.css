@@ -143,9 +143,17 @@ th {
 .right {
 	min-width: 73%;
 }
-h2 {
+h1 {
 	color: #181818;
 	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	margin: 0 0 20px 0;
+}
+h2 {
+	color: #181818;
+	font-size: 20px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: normal;

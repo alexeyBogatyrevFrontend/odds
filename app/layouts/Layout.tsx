@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, fetchNews } from '@/lib/slices/newsSlice'
 import { RootState } from '../../types'
 import { useRouter } from 'next/router'
-import { useSearchParams } from 'next/navigation'
 
 type LayoutType = {
 	children: ReactNode
@@ -24,11 +23,6 @@ const Layout: FC<LayoutType> = ({ children }) => {
 	// useEffect(() => {
 	// 	if (!newsList.length) dispatch(fetchNews())
 	// }, [dispatch])
-
-	// const router = useRouter()
-	const searchParams = useSearchParams()
-
-	const category = searchParams.get('category')
 
 	return (
 		<div className='mainWrapper'>

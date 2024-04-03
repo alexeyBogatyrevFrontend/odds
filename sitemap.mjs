@@ -118,10 +118,10 @@ async function generateSitemapContent(events, baseUrl) {
 			// Добавляем каждый URL в sitemapEntries
 			for (const gameId of gameIds) {
 				const gameUrl = `${baseUrl}/odds/gamepage/${encodeURIComponent(
-					event.key
-				)}&amp;${encodeURIComponent(gameId)}?category=${encodeURIComponent(
 					event.group
-				)}`
+				)}&amp;${encodeURIComponent(event.key)}&amp;${encodeURIComponent(
+					gameId
+				)}?category=${encodeURIComponent(event.group)}`
 				sitemapEntries += `  <url><loc>${gameUrl}</loc></url>\n`
 				console.log('Game URL:', gameUrl)
 			}

@@ -176,7 +176,7 @@ const fetchDataAndSaveToDB = async () => {
 						gptText: generatedText,
 					})
 
-					console.log(tempData.sports.length)
+					console.log(tempData.odds.length)
 				}
 			} catch (error) {
 				if (error.response && error.response.status === 422) {

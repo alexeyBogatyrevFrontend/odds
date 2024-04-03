@@ -1,12 +1,10 @@
 import { fetchEvents } from '@/app/action'
-
 import Layout from '@/app/layouts/Layout'
 import { formatDate } from '@/app/utils/formatDate'
 import { FC } from 'react'
-
 import styles from '../GamePage.module.css'
-import generateText from '@/lib/openai'
 import { GamesInterface } from '@/types'
+import { formattedDate } from '@/app/layout'
 
 type GamePageProps = {
 	params: {
@@ -14,15 +12,26 @@ type GamePageProps = {
 	}
 }
 
+const sportsName = {
+	Soccer: 'Футбол',
+	Basketball: 'Баскетбол',
+	Tennis: 'Тенис',
+	'Ice%20Hockey': 'Хоккей',
+	Cricket: 'Крикет',
+	Boxing: 'Бокс',
+}
+
 export async function generateMetadata({ params: { id } }: GamePageProps) {
-	const key = id.split('%26')[0]
-	const gameId = id.split('%26')[1]
+	const group = id.split('%26')[0]
+	const key = id.split('%26')[1]
+	const gameId = id.split('%26')[2]
 
 	const games: GamesInterface[] = await fetchEvents(key)
 	const game = games.filter(game => game.id === gameId)[0]
-
-	const title = `${game.home_team} VS ${game.away_team} | ${game.sport_title}`
-	const description = `${game.gptText?.split('.').slice(0, 2).join('.') + '.'}`
+	// @ts-expect-error something wrong
+	const title = `${sportsName[group]}, ${game.sport_title} ${formattedDate}: результаты прошедших матчей, расписание игр, статистика, прямые онлайн трансляции`
+	// @ts-expect-error something wrong
+	const description = `${sportsName[group]}, ${game.sport_title} ${formattedDate}: обзор результатов последних матчей, статистика, прогнозы, прямые видео онлайн трансляции, расписание матчей на сегодня/завтра, турнирные таблицы. Смотри всю информацию о матчах ${game.sport_title} на портале sport-odds.top`
 
 	return {
 		title: title,
@@ -31,23 +40,18 @@ export async function generateMetadata({ params: { id } }: GamePageProps) {
 }
 
 const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
-	const key = id.split('%26')[0]
-	const gameId = id.split('%26')[1]
+	const key = id.split('%26')[1]
+	const gameId = id.split('%26')[2]
 
 	const games: GamesInterface[] = await fetchEvents(key)
 	const game = games.filter(game => game.id === gameId)[0]
 
-	const date =
-		formatDate(game.commence_time).dayOfMonth +
-		' ' +
-		formatDate(game.commence_time).month
-
-	// const generatedText = await generateText(game.home_team, game.away_team, date)
-
 	return (
 		<Layout>
 			<div className='mb-8'>
-				<h2>Спортивное событие</h2>
+				<h1>
+					{game.sport_title} {formattedDate}
+				</h1>
 				<div className={styles.block}>
 					<div
 						className={styles.block__game}
