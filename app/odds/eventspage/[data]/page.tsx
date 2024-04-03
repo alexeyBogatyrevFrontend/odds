@@ -15,12 +15,24 @@ type EventsPageProps = {
 	}
 }
 
+const sportsName = {
+	Soccer: 'Футбол',
+	Basketball: 'Баскетбол',
+	Tennis: 'Тенис',
+	'Ice%20Hockey': 'Хоккей',
+	Cricket: 'Крикет',
+	Boxing: 'Бокс',
+}
+
 export async function generateMetadata({ params: { data } }: EventsPageProps) {
+	const sport = data.split('%26')[0]
 	const key = data.split('%26')[1]
 	const games: GamesInterface[] = await fetchEvents(key)
 
-	const title = `${games[0].sport_title} ${formattedDate}: прямая онлайн трансляция, статистика матча, прогнозы`
-	const description = `${games[0].sport_title} ${formattedDate}: смотреть онлайн трансляцию матча в прямом эфире. Вся информация о матче: статистика, прогнозы, новости, видео, интервью. `
+	// @ts-expect-error something wrong
+	const title = `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: результаты прошедших матчей, расписание игр, статистика, прямые онлайн трансляции`
+	// @ts-expect-error something wrong
+	const description = `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: обзор результатов последних матчей, статистика, прогнозы, прямые видео онлайн трансляции, расписание матчей на сегодня/завтра, турнирные таблицы. Смотри всю информацию о матчах ${games[0].sport_title} на портале sport-odds.top`
 
 	return {
 		title,

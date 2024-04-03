@@ -12,15 +12,6 @@ type GamePageProps = {
 	}
 }
 
-const sportsName = {
-	Soccer: 'Футбол',
-	Basketball: 'Баскетбол',
-	Tennis: 'Тенис',
-	'Ice%20Hockey': 'Хоккей',
-	Cricket: 'Крикет',
-	Boxing: 'Бокс',
-}
-
 export async function generateMetadata({ params: { id } }: GamePageProps) {
 	const group = id.split('%26')[0]
 	const key = id.split('%26')[1]
@@ -28,10 +19,9 @@ export async function generateMetadata({ params: { id } }: GamePageProps) {
 
 	const games: GamesInterface[] = await fetchEvents(key)
 	const game = games.filter(game => game.id === gameId)[0]
-	// @ts-expect-error something wrong
-	const title = `${sportsName[group]}, ${game.sport_title} ${formattedDate}: результаты прошедших матчей, расписание игр, статистика, прямые онлайн трансляции`
-	// @ts-expect-error something wrong
-	const description = `${sportsName[group]}, ${game.sport_title} ${formattedDate}: обзор результатов последних матчей, статистика, прогнозы, прямые видео онлайн трансляции, расписание матчей на сегодня/завтра, турнирные таблицы. Смотри всю информацию о матчах ${game.sport_title} на портале sport-odds.top`
+
+	const title = `${game.home_team} - ${game.away_team} ${formattedDate}: прямая онлайн трансляция, статистика матча, прогнозы`
+	const description = `${game.home_team} - ${game.away_team} ${formattedDate}: смотреть онлайн трансляцию матча в прямом эфире. Вся информация о матче: статистика, прогнозы, новости, видео, интервью. `
 
 	return {
 		title: title,
@@ -50,7 +40,7 @@ const GamePage: FC<GamePageProps> = async ({ params: { id } }) => {
 		<Layout>
 			<div className='mb-8'>
 				<h1>
-					{game.sport_title} {formattedDate}
+					{game.home_team} - {game.away_team} {formattedDate}
 				</h1>
 				<div className={styles.block}>
 					<div
