@@ -41,6 +41,7 @@ const SportsPage: FC<SportsPageProps> = async ({ params: { category } }) => {
 	}
 
 	const sports: EventType[] = await fetchSports(key)
+	console.log(sports)
 
 	return (
 		<Layout>

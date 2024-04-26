@@ -29,10 +29,15 @@ export async function generateMetadata({ params: { data } }: EventsPageProps) {
 	const key = data.split('%26')[1]
 	const games: GamesInterface[] = await fetchEvents(key)
 
-	// @ts-expect-error something wrong
-	const title = `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: результаты прошедших матчей, расписание игр, статистика, прямые онлайн трансляции`
-	// @ts-expect-error something wrong
-	const description = `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: обзор результатов последних матчей, статистика, прогнозы, прямые видео онлайн трансляции, расписание матчей на сегодня/завтра, турнирные таблицы. Смотри всю информацию о матчах ${games[0].sport_title} на портале sport-odds.top`
+	const title = games.length
+		? // @ts-expect-error something wrong
+		  `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: результаты прошедших матчей, расписание игр, статистика, прямые онлайн трансляции`
+		: 'В данной лиге нет событий'
+
+	const description = games.length
+		? // @ts-expect-error something wrong
+		  `${sportsName[sport]}, ${games[0].sport_title} ${formattedDate}: обзор результатов последних матчей, статистика, прогнозы, прямые видео онлайн трансляции, расписание матчей на сегодня/завтра, турнирные таблицы. Смотри всю информацию о матчах ${games[0].sport_title} на портале sport-odds.top`
+		: 'В данной лиге нет событий'
 
 	return {
 		title,
@@ -49,6 +54,7 @@ const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 
 	return (
 		<Layout>
+			{!games.length && <h1>В данной лиге нет событий</h1>}
 			{games.length > 0 && (
 				<div className='mb-8'>
 					<h1>
@@ -57,7 +63,7 @@ const EventsPage: FC<EventsPageProps> = async ({ params: { data } }) => {
 					<div className={styles.wrapper}>
 						{games.map((game, index) => (
 							<Link
-								href={`/odds/gamepage/${group}&${key}&${game.id}?category=${group}`}
+								href={`/odds/gamepage/${key}&${game.id}?category=${group}`}
 								key={index}
 							>
 								<div className={styles.block}>

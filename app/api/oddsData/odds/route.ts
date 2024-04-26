@@ -12,6 +12,8 @@ export const GET = async () => {
 			collection: collectionName,
 		})
 
+		console.log(data)
+
 		return NextResponse.json(data)
 	} catch (error) {
 		console.log(error)

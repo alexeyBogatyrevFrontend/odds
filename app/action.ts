@@ -41,7 +41,7 @@ export const fetchEvents = async (key: string) => {
 
 		const events = result.filter(event => event.sport_key === key)
 
-		// console.log(response.data)
+		// console.log(events)
 
 		return events
 	} catch (error: any) {

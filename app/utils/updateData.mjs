@@ -57,7 +57,7 @@ const generateText = async (first, second, date) => {
 }
 
 // odds
-const API_KEY = 'zfme0kbYPxejRvJvTdv5gs0LfaadXMSF'
+const API_KEY = process.env.NEXT_PUBLIC_ODDS_API_KEY
 const MONGODB_URI = 'mongodb://127.0.0.1:27017/oddsData'
 
 let dateFormat = 'iso'
